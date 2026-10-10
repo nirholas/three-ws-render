@@ -1,0 +1,19 @@
+# @three-ws/render
+
+> Render rigged, animated 3D avatars to PNG, GIF and truecolor terminal ANSI with no GPU, no WebGL and no headless browser. Pure JavaScript software rasterizer for glTF/GLB.
+
+@three-ws/render is a JavaScript library from three.ws. Install: `npx -y @three-ws/render`.
+
+## Docs
+
+- [README](https://github.com/nirholas/three-ws-render/blob/main/README.md): install, configuration, full reference
+- [Documentation site](https://nirholas.github.io/three-ws-render/): the README as a web page
+- [Full text for LLMs](https://nirholas.github.io/three-ws-render/llms-full.txt): README inlined
+- [AGENTS.md](https://github.com/nirholas/three-ws-render/blob/main/AGENTS.md): guidance for coding agents
+
+## Project
+
+- [Source](https://github.com/nirholas/three-ws-render)
+- [npm](https://www.npmjs.com/package/@three-ws/render)
+- [three.ws](https://three.ws): the platform this is part of
+- [Issues](https://github.com/nirholas/three-ws-render/issues)

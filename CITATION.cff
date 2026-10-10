@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: If you use this software, please cite it as below.
+title: "@three-ws/render"
+abstract: "Render rigged, animated 3D avatars to PNG, GIF and truecolor terminal ANSI with no GPU, no WebGL and no headless browser. Pure JavaScript software rasterizer for glTF/GLB."
+version: 0.1.0
+license: Apache-2.0
+repository-code: "https://github.com/nirholas/three-ws-render"
+url: "https://three.ws"
+authors:
+  - name: three.ws
+    website: "https://three.ws"

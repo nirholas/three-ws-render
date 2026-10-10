@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>@three-ws/render: Render rigged, animated 3D avatars to PNG, GIF and truecolor terminal </title>
+<meta name="description" content="Render rigged, animated 3D avatars to PNG, GIF and truecolor terminal ANSI with no GPU, no WebGL and no headless browser. Pure JavaScript software rasterizer for glTF/GLB.">
+<link rel="canonical" href="https://nirholas.github.io/three-ws-render/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="three.ws">
+<meta property="og:title" content="@three-ws/render">
+<meta property="og:description" content="Render rigged, animated 3D avatars to PNG, GIF and truecolor terminal ANSI with no GPU, no WebGL and no headless browser. Pure JavaScript software rasterizer for glTF/GLB.">
+<meta property="og:url" content="https://nirholas.github.io/three-ws-render/">
+<meta property="og:image" content="https://nirholas.github.io/three-ws-render/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="@three-ws/render">
+<meta name="twitter:description" content="Render rigged, animated 3D avatars to PNG, GIF and truecolor terminal ANSI with no GPU, no WebGL and no headless browser. Pure JavaScript software rasterizer for glTF/GLB.">
+<meta name="twitter:image" content="https://nirholas.github.io/three-ws-render/og.png">
+<meta name="keywords" content="3d, glb, gltf, software-renderer, rasterizer, headless, cpu-rendering, ansi, terminal, avatar, three.js, skinning, og-image, ai-agents, three.ws">
+<link rel="alternate" type="text/plain" href="llms.txt" title="llms.txt">
+<link rel="icon" href="https://three.ws/three-ws-mcp-icon.svg" type="image/svg+xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareSourceCode","name":"@three-ws/render","description":"Render rigged, animated 3D avatars to PNG, GIF and truecolor terminal ANSI with no GPU, no WebGL and no headless browser. Pure JavaScript software rasterizer for glTF/GLB.","codeRepository":"https://github.com/nirholas/three-ws-render","programmingLanguage":"JavaScript","license":"https://spdx.org/licenses/Apache-2.0.html","version":"0.1.0","url":"https://nirholas.github.io/three-ws-render/","author":{"@type":"Organization","name":"three.ws","url":"https://three.ws"},"keywords":"3d, glb, gltf, software-renderer, rasterizer, headless, cpu-rendering, ansi, terminal, avatar, three.js, skinning, og-image, ai-agents, three.ws"}</script>
+<style>:root{--bg:#fff;--fg:#111418;--mut:#586069;--line:#e3e6ea;--acc:#2563eb;--code:#f4f6f8;--card:#fafbfc}
+@media(prefers-color-scheme:dark){:root{--bg:#0b0d10;--fg:#e8eaed;--mut:#9aa3ad;--line:#232830;--acc:#6ea0ff;--code:#14181d;--card:#10141a}}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.65 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+a{color:var(--acc)}a:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-offset:2px;border-radius:4px}
+header.bar{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar-in{max-width:1100px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.brand{font-weight:700;text-decoration:none;color:var(--fg)}
+.bar nav{margin-left:auto;display:flex;gap:16px;font-size:14px}
+.bar nav a{color:var(--mut);text-decoration:none;transition:color .15s}.bar nav a:hover{color:var(--fg)}
+.hero{max-width:1100px;margin:0 auto;padding:48px 16px 24px}
+.hero h1{font-size:clamp(28px,5vw,44px);line-height:1.15;margin:0 0 12px;letter-spacing:-.02em}
+.hero p{color:var(--mut);max-width:70ch;font-size:18px;margin:0 0 24px}
+.install{display:flex;align-items:center;gap:8px;max-width:620px;background:var(--code);border:1px solid var(--line);border-radius:10px;padding:6px 6px 6px 14px}
+.install code{flex:1;overflow-x:auto;white-space:nowrap;font:14px ui-monospace,SFMono-Regular,Menlo,monospace}
+.install button{border:0;background:var(--acc);color:#fff;border-radius:7px;padding:8px 14px;font:600 13px system-ui;cursor:pointer;transition:transform .12s,opacity .12s}
+.install button:hover{opacity:.9}.install button:active{transform:scale(.96)}
+.cta{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.cta a{padding:9px 16px;border:1px solid var(--line);border-radius:8px;text-decoration:none;font-weight:600;font-size:14px;color:var(--fg);transition:border-color .15s,transform .15s}
+.cta a:hover{border-color:var(--acc);transform:translateY(-1px)}.cta a.pri{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.layout{max-width:1100px;margin:0 auto;padding:8px 16px 64px;display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:40px}
+@media(max-width:860px){.layout{grid-template-columns:minmax(0,1fr)}.toc{display:none}}
+.toc{position:sticky;top:76px;align-self:start;font-size:14px;border-left:1px solid var(--line);padding-left:16px}
+.toc p{margin:0 0 8px;font-weight:700;color:var(--mut);text-transform:uppercase;font-size:12px;letter-spacing:.06em}
+.toc ul{list-style:none;margin:0;padding:0}.toc li{margin:6px 0}.toc a{color:var(--mut);text-decoration:none}.toc a:hover{color:var(--fg)}
+main{min-width:0;overflow-wrap:anywhere}main pre code{overflow-wrap:normal}main img{max-width:100%;height:auto}
+main h2{margin-top:2.2em;padding-bottom:.3em;border-bottom:1px solid var(--line)}
+.anchor{margin-left:-1.1em;padding-right:.4em;text-decoration:none;opacity:0;color:var(--mut)}h2:hover .anchor,h3:hover .anchor,h4:hover .anchor{opacity:1}
+pre{background:var(--code);border:1px solid var(--line);border-radius:10px;padding:14px 16px;overflow-x:auto;font-size:14px;line-height:1.5}
+code{font:0.9em ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--code);padding:.15em .35em;border-radius:5px}pre code{background:none;padding:0}
+table{border-collapse:collapse;display:block;overflow-x:auto;max-width:100%}th,td{border:1px solid var(--line);padding:8px 12px;text-align:left}th{background:var(--card)}
+blockquote{margin:1em 0;padding:.2em 1em;border-left:4px solid var(--line);color:var(--mut)}
+footer{border-top:1px solid var(--line);color:var(--mut);font-size:14px}
+.foot-in{max-width:1100px;margin:0 auto;padding:24px 16px;display:flex;gap:16px;flex-wrap:wrap}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}</style>
+</head>
+<body>
+<header class="bar"><div class="bar-in">
+<a class="brand" href="https://nirholas.github.io/three-ws-render/">@three-ws/render</a>
+<nav aria-label="Project links"><a href="https://github.com/nirholas/three-ws-render">GitHub</a><a href="https://www.npmjs.com/package/@three-ws/render">npm</a><a href="llms.txt">llms.txt</a><a href="https://three.ws">three.ws</a></nav>
+</div></header>
+<section class="hero">
+<h1>@three-ws/render</h1>
+<p>Render rigged, animated 3D avatars to PNG, GIF and truecolor terminal ANSI with no GPU, no WebGL and no headless browser. Pure JavaScript software rasterizer for glTF/GLB.</p>
+<div class="install" role="group" aria-label="Install command"><code>npx -y @three-ws/render</code><button type="button" data-copy="npx -y @three-ws/render">Copy</button></div>
+<div class="cta"><a class="pri" href="https://github.com/nirholas/three-ws-render">View on GitHub</a><a href="https://github.com/nirholas/three-ws-render/stargazers">Star the repo</a></div>
+</section>
+<div class="layout">
+<main id="content"><h1>@three-ws/render</h1>
+<p>Render rigged, animated 3D avatars to PNG, animated PNG, or truecolor terminal
+output. <strong>No GPU. No WebGL. No headless browser.</strong> A pure-JavaScript software
+rasterizer that runs anywhere Node runs: a serverless handler, a cron job, a
+container with 512 MB of RAM, a CI step, your laptop.</p>
+<pre><code class="language-bash">npx @three-ws/render https://three.ws/avatars/default.glb --out avatar.png
+</code></pre>
+<p>This is the renderer behind every server-side avatar picture on three.ws. It
+replaced a headless-chromium pipeline that cost a 300 MB browser launch and
+3-15 seconds per cold render with an in-process call that takes a few hundred
+milliseconds and fetches nothing.</p>
+<h2 id="why-this-exists"><a class="anchor" href="#why-this-exists" aria-label="Link to this section">#</a>Why this exists</h2>
+<p>Rendering a 3D model on a server has meant one of two things: a GPU, or a
+headless browser pretending to be one. Both are heavy, and both fail in the
+places you most want a picture: a social-card handler with a 30 second budget,
+a batch job over a hundred thousand models, a machine with no display stack at
+all.</p>
+<p>There is a third option nobody ships, because it is a lot of work: rasterize it
+yourself. That is what this package is. It parses the glTF, blends the bone
+matrices on the CPU, walks the triangles with a z-buffer, samples the textures
+through real mip pyramids, and writes the pixels out. It is fast because it
+only ever does the work a still frame actually needs.</p>
+<h2 id="install"><a class="anchor" href="#install" aria-label="Link to this section">#</a>Install</h2>
+<pre><code class="language-bash">npm install @three-ws/render
+</code></pre>
+<p><code>three</code> is the only required dependency (used for glTF parsing, animation
+sampling and matrix maths, never for rendering). <code>sharp</code> is optional and only
+decodes JPEG textures; PNG textures decode in-process with <code>zlib</code>. Without
+<code>sharp</code>, a JPEG-textured model renders with its material colours instead of its
+maps, and everything else is identical.</p>
+<h2 id="use-it"><a class="anchor" href="#use-it" aria-label="Link to this section">#</a>Use it</h2>
+<h3 id="a-still"><a class="anchor" href="#a-still" aria-label="Link to this section">#</a>A still</h3>
+<pre><code class="language-js">import { renderAvatar, encodePng } from &#39;@three-ws/render&#39;;
+import { writeFile } from &#39;node:fs/promises&#39;;
+
+const { frames } = await renderAvatar(&#39;https://three.ws/avatars/default.glb&#39;, {
+  width: 1200,
+  height: 630,
+  focus: &#39;full&#39;,                       // &#39;full&#39; | &#39;bust&#39; | &#39;head&#39;
+  background: { inner: &#39;#1b2440&#39;, outer: &#39;#05060c&#39; },
+});
+
+await writeFile(&#39;card.png&#39;, encodePng(frames[0]));
+</code></pre>
+<h3 id="an-animation"><a class="anchor" href="#an-animation" aria-label="Link to this section">#</a>An animation</h3>
+<pre><code class="language-js">import { renderAvatar, encodeApng } from &#39;@three-ws/render&#39;;
+import { writeFile } from &#39;node:fs/promises&#39;;
+
+const { frames } = await renderAvatar(&#39;avatar.glb&#39;, {
+  animation: &#39;walk.glb&#39;,   // clips are retargeted onto this rig by bone name
+  clip: &#39;walk&#39;,
+  frames: 24,
+  fps: 20,
+  width: 320,
+  height: 320,
+  background: &#39;transparent&#39;,
+});
+
+await writeFile(&#39;walk.png&#39;, encodeApng(frames, { fps: 20 }));
+</code></pre>
+<p>Animated PNG rather than GIF on purpose: GIF would quantize the render to 256
+colours and hard-edge the alpha, while APNG keeps the full 24-bit image and the
+soft contact shadow, and every current browser plays it.</p>
+<h3 id="a-turntable-with-no-animation-data-at-all"><a class="anchor" href="#a-turntable-with-no-animation-data-at-all" aria-label="Link to this section">#</a>A turntable, with no animation data at all</h3>
+<pre><code class="language-js">const { frames } = await renderAvatar(&#39;prop.glb&#39;, { frames: 36, spin: 360 });
+</code></pre>
+<h3 id="in-a-terminal"><a class="anchor" href="#in-a-terminal" aria-label="Link to this section">#</a>In a terminal</h3>
+<pre><code class="language-js">import { renderAvatar, toHalfBlocks, detectTerminal } from &#39;@three-ws/render&#39;;
+
+const term = detectTerminal();
+const { frames } = await renderAvatar(&#39;avatar.glb&#39;, { width: 60, height: 60, preset: &#39;terminal&#39; });
+process.stdout.write(toHalfBlocks(frames[0], { truecolor: term.truecolor }));
+</code></pre>
+<p>Each terminal cell carries two vertical pixels (the upper half-block glyph,
+foreground over background), so a 60-column render is 60x60 pixels rather than
+60x30. On Kitty, Ghostty, WezTerm and iTerm2 the CLI sends the real PNG through
+the terminal&#39;s own graphics protocol instead.</p>
+<h2 id="cli"><a class="anchor" href="#cli" aria-label="Link to this section">#</a>CLI</h2>
+<pre><code>three-ws-tty &lt;model.glb | url&gt; [options]
+
+  --out &lt;file&gt;        write a PNG (animated PNG when --frames &gt; 1)
+  --width &lt;n&gt;         output width in pixels (default: fits the terminal)
+  --height &lt;n&gt;        output height in pixels
+  --focus &lt;mode&gt;      full | bust | head            (default: full)
+  --preset &lt;name&gt;     studio | terminal | daylight  (default: terminal for tty)
+  --clip &lt;name|idx&gt;   clip to play, from the model or --animation
+  --animation &lt;file&gt;  GLB or clip JSON to retarget onto this rig
+  --frames &lt;n&gt;        frame count                   (default: 1, or 36 with --spin)
+  --fps &lt;n&gt;           frames per second             (default: 20)
+  --spin &lt;deg&gt;        turntable degrees across the loop
+  --yaw &lt;deg&gt;         camera yaw                    (default: 26)
+  --pitch &lt;deg&gt;       camera pitch                  (default: 6)
+  --bg &lt;color&gt;        hex colour or &#39;transparent&#39;
+  --loop              keep animating in the terminal until interrupted
+  --blocks            force half-blocks even where inline images work
+  --clips             list the model&#39;s clips and exit
+</code></pre>
+<pre><code class="language-bash"># A headshot, ready for an avatar field
+three-ws-tty avatar.glb --focus head --width 512 --out headshot.png
+
+# A looping wave, transparent, for a README
+three-ws-tty avatar.glb --animation wave.glb --clip wave --frames 24 --bg transparent --out wave.png
+
+# Look at a model you just downloaded, without opening anything
+three-ws-tty ~/Downloads/model.glb --spin 360 --loop
+</code></pre>
+<h2 id="what-it-renders"><a class="anchor" href="#what-it-renders" aria-label="Link to this section">#</a>What it renders</h2>
+<ul>
+<li><strong>Skinned humanoid avatars</strong>, posed by real animation clips. Bone matrices are
+blended per vertex on the CPU, and normals ride the same matrix, so a walking
+avatar shades correctly instead of shimmering.</li>
+<li><strong>Meshopt-compressed and quantized glTF</strong> (<code>EXT_meshopt_compression</code>,
+<code>KHR_mesh_quantization</code>), which is what most three.ws avatars ship as.</li>
+<li><strong>Textures</strong> through box-filtered mip pyramids with trilinear sampling and a
+per-triangle level of detail, so a 1024px skin atlas on a 96px avatar reads as
+skin rather than noise.</li>
+<li><strong>Transparency</strong>: alpha-masked hair and eyelash cards, and a depth-tested
+back-to-front blended pass for genuinely transparent materials.</li>
+<li><strong>A planar projected contact shadow</strong>, blurred, so the model sits on a surface
+instead of floating.</li>
+<li><strong>Supersampled edges</strong>, resolved through an ACES tonemap into straight-alpha
+RGBA.</li>
+</ul>
+<h2 id="what-it-does-not-render"><a class="anchor" href="#what-it-does-not-render" aria-label="Link to this section">#</a>What it does not render</h2>
+<p>Stated plainly, because a renderer that lies about its coverage is worse than
+one with gaps:</p>
+<ul>
+<li><strong>Draco-compressed geometry</strong> (<code>KHR_draco_mesh_compression</code>) needs a decoder
+this package does not ship. It throws with a message telling you to re-export
+with <code>gltfpack -cc</code>.</li>
+<li><strong>KTX2 / Basis textures</strong> are skipped; the material falls back to its base
+colour factor, which is a real colour, not a placeholder.</li>
+<li><strong>Morph targets / blendshapes</strong> are not evaluated. Skeletal animation is.</li>
+<li><strong>PBR is approximated.</strong> Base colour, roughness and emissive drive a
+Blinn-Phong studio rig with a rim light. There is no image-based lighting, no
+metallic reflection and no ray tracing. It is built to make an avatar look
+like itself in a card, not to be a path tracer.</li>
+</ul>
+<h2 id="api"><a class="anchor" href="#api" aria-label="Link to this section">#</a>API</h2>
+<table>
+<thead>
+<tr>
+<th>Export</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>renderAvatar(source, options)</code></td>
+<td>Load and render in one call. Returns <code>{ model, frames }</code>.</td>
+</tr>
+<tr>
+<td><code>AvatarModel.load(source, options)</code></td>
+<td>Load a GLB into a posable model.</td>
+</tr>
+<tr>
+<td><code>model.addClips(clips)</code></td>
+<td>Retarget clips onto this skeleton by bone name.</td>
+</tr>
+<tr>
+<td><code>model.play(nameOrIndex)</code> / <code>model.setTime(s)</code></td>
+<td>Pose the model.</td>
+</tr>
+<tr>
+<td><code>model.updateBounds()</code></td>
+<td>Re-measure the framing bounds after posing the skeleton yourself (bounds are otherwise taken once, in the bind pose).</td>
+</tr>
+<tr>
+<td><code>renderFrame(model, options)</code></td>
+<td>One RGBA frame.</td>
+</tr>
+<tr>
+<td><code>renderFrames(model, options)</code></td>
+<td>A frame list, with animation and turntable spin.</td>
+</tr>
+<tr>
+<td><code>frameCamera(bounds, options)</code></td>
+<td>The camera used for a given focus mode.</td>
+</tr>
+<tr>
+<td><code>encodePng(frame)</code> / <code>encodeApng(frames, { fps })</code></td>
+<td>Image bytes, no native dependency.</td>
+</tr>
+<tr>
+<td><code>toHalfBlocks(frame)</code> / <code>toKitty(png)</code> / <code>toITerm(png)</code></td>
+<td>Terminal output.</td>
+</tr>
+<tr>
+<td><code>detectTerminal()</code></td>
+<td>Columns, truecolor support, inline-image support.</td>
+</tr>
+<tr>
+<td><code>parseClipJson(json)</code> / <code>loadClipJson(url)</code></td>
+<td>three.js AnimationClip JSON.</td>
+</tr>
+<tr>
+<td><code>parseGlb</code> / <code>packGlb</code> / <code>stripImages</code> / <code>extractImages</code></td>
+<td>The GLB container layer.</td>
+</tr>
+<tr>
+<td><code>normalizeBoneName(name)</code> / <code>retargetClip(clip, skeleton)</code></td>
+<td>Rig-independent bone naming.</td>
+</tr>
+<tr>
+<td><code>PRESETS</code> / <code>FOCUS</code></td>
+<td>Named lighting rigs and framing modes.</td>
+</tr>
+</tbody></table>
+<p><code>source</code> is a URL, a file path, an <code>ArrayBuffer</code> or a typed array. Frames are
+<code>{ width, height, data }</code> where <code>data</code> is straight-alpha RGBA, which is exactly
+what <code>sharp</code>, <code>canvas</code>, <code>ImageData</code> and every encoder already expect.</p>
+<h3 id="options"><a class="anchor" href="#options" aria-label="Link to this section">#</a>Options</h3>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>width</code> / <code>height</code></td>
+<td><code>512</code></td>
+<td>Output size in pixels.</td>
+</tr>
+<tr>
+<td><code>supersample</code></td>
+<td><code>2</code></td>
+<td>Render scale before the box-filtered resolve (1-4).</td>
+</tr>
+<tr>
+<td><code>preset</code></td>
+<td><code>&#39;studio&#39;</code></td>
+<td><code>studio</code>, <code>terminal</code> or <code>daylight</code>.</td>
+</tr>
+<tr>
+<td><code>focus</code></td>
+<td><code>&#39;full&#39;</code></td>
+<td><code>full</code>, <code>bust</code> or <code>head</code>.</td>
+</tr>
+<tr>
+<td><code>yaw</code> / <code>pitch</code></td>
+<td><code>26</code> / <code>6</code></td>
+<td>Camera angles in degrees.</td>
+</tr>
+<tr>
+<td><code>fov</code></td>
+<td><code>30</code></td>
+<td>Vertical field of view.</td>
+</tr>
+<tr>
+<td><code>background</code></td>
+<td>preset</td>
+<td><code>&#39;transparent&#39;</code>, <code>&#39;#rrggbb&#39;</code>, <code>[top, bottom]</code>, or <code>{ inner, outer }</code>.</td>
+</tr>
+<tr>
+<td><code>shadow</code></td>
+<td>preset</td>
+<td>Contact-shadow strength, <code>0</code> to disable.</td>
+</tr>
+<tr>
+<td><code>frames</code> / <code>fps</code></td>
+<td><code>1</code> / <code>24</code></td>
+<td>Animation length.</td>
+</tr>
+<tr>
+<td><code>spin</code></td>
+<td><code>0</code></td>
+<td>Turntable degrees spread across the frames.</td>
+</tr>
+<tr>
+<td><code>clip</code></td>
+<td><code>null</code></td>
+<td>Clip name or index to play.</td>
+</tr>
+<tr>
+<td><code>animation</code></td>
+<td>none</td>
+<td>A second GLB whose clips are retargeted onto this rig.</td>
+</tr>
+<tr>
+<td><code>maxBytes</code></td>
+<td>64 MB</td>
+<td>Cap on the fetched model.</td>
+</tr>
+<tr>
+<td><code>maxTextureSize</code></td>
+<td><code>1024</code></td>
+<td>Working texture resolution.</td>
+</tr>
+</tbody></table>
+<h2 id="rig-support"><a class="anchor" href="#rig-support" aria-label="Link to this section">#</a>Rig support</h2>
+<p>Clips are bound by normalized bone name, so a Mixamo walk drives a Ready Player
+Me body. <code>normalizeBoneName</code> collapses Mixamo (<code>mixamorig:LeftForeArm</code>), Ready
+Player Me (<code>LeftForeArm</code>), VRM/VRoid (<code>J_Bip_L_UpperArm</code>), Blender
+(<code>upper_arm.L</code>), and bare camelCase side suffixes (<code>shoulderL</code>) onto one key. A
+clip whose rig shares fewer than four bones with the target is refused rather
+than played as a scramble.</p>
+<h2 id="performance"><a class="anchor" href="#performance" aria-label="Link to this section">#</a>Performance</h2>
+<p>Measured on one shared vCPU, rendering the default three.ws avatar (13k
+triangles, six 512-1024px textures):</p>
+<table>
+<thead>
+<tr>
+<th>Render</th>
+<th>Time</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Load and decode the model (once, then cached)</td>
+<td>~1.0 s</td>
+</tr>
+<tr>
+<td>512x512, 2x supersampled</td>
+<td>~520 ms</td>
+</tr>
+<tr>
+<td>1200x630 OG card, 2x supersampled</td>
+<td>~540 ms warm</td>
+</tr>
+<tr>
+<td>288x288, no supersampling</td>
+<td>~60 ms</td>
+</tr>
+<tr>
+<td>16-frame animation at 288x288</td>
+<td>~910 ms</td>
+</tr>
+</tbody></table>
+<p>Decoding dominates the first render, so hold the <code>AvatarModel</code> if you are
+rendering the same avatar more than once.</p>
+<h2 id="where-it-runs-on-threews"><a class="anchor" href="#where-it-runs-on-threews" aria-label="Link to this section">#</a>Where it runs on three.ws</h2>
+<ul>
+<li>Every OG card and avatar thumbnail, through
+<a href="https://github.com/nirholas/three-ws-render/blob/main/./../api/_lib/render-cpu.js"><code>api/_lib/render-cpu.js</code></a>. The dispatcher in
+<code>api/_lib/render-glb.js</code> tries this lane first and keeps chromium as failover.</li>
+<li><a href="https://github.com/nirholas/three-ws-render/blob/main/./../docs/api-reference.md"><code>GET /api/render/animate</code></a>, which turns any
+public avatar into an animated PNG you can drop in a README.</li>
+</ul>
+<h2 id="license"><a class="anchor" href="#license" aria-label="Link to this section">#</a>License</h2>
+<p>Apache-2.0</p>
+</main>
+<nav class="toc" aria-label="On this page"><p>On this page</p><ul><li><a href="#why-this-exists">Why this exists</a></li><li><a href="#install">Install</a></li><li><a href="#use-it">Use it</a></li><li><a href="#cli">CLI</a></li><li><a href="#what-it-renders">What it renders</a></li><li><a href="#what-it-does-not-render">What it does not render</a></li><li><a href="#api">API</a></li><li><a href="#rig-support">Rig support</a></li><li><a href="#performance">Performance</a></li><li><a href="#where-it-runs-on-threews">Where it runs on three.ws</a></li><li><a href="#license">License</a></li></ul></nav>
+</div>
+<footer><div class="foot-in"><span>Apache-2.0 licensed</span><a href="https://github.com/nirholas/three-ws-render/issues">Issues</a><a href="https://github.com/nirholas/three-ws-render/blob/main/CONTRIBUTING.md">Contributing</a><a href="https://github.com/nirholas/three-ws-render/security/policy">Security</a><a href="https://three.ws">Part of three.ws</a></div></footer>
+<script>document.querySelectorAll('[data-copy]').forEach(function(b){b.addEventListener('click',function(){
+var t=b.getAttribute('data-copy');var done=function(){var o=b.textContent;b.textContent='Copied';setTimeout(function(){b.textContent=o},1400)};
+if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(done,function(){})}
+else{var a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();try{document.execCommand('copy');done()}catch(e){}a.remove()}})});</script>
+</body>
+</html>
